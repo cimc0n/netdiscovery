@@ -30,16 +30,14 @@ dic=( $(ReadFile $file_dic))
 
 for value in "${dic[@]}"
 do
-echo $value
-
-for ip in "${target[@]}"
-do
-  while [`jobs | wc -l` -ge $thread ]
-  do
-    sleep 5
-  echo $(jobs | wc -l)  
-  done
-    TestSNMP $value $ip &
-done
-
+    echo $value
+    for ip in "${target[@]}"
+    do
+        while [`jobs | wc -l` -ge $thread ]
+        do
+            sleep 5
+            echo $(jobs | wc -l)  
+        done
+        TestSNMP $value $ip &
+    done
 done
